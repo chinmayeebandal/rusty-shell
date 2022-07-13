@@ -25,8 +25,9 @@ fn main() {
         //implementing 'cd' command
         match command {
             "cd" => {
-                
-            }
+
+            },
+            _ => println!("error")
         }
 
         let mut child = Command::new(command)
