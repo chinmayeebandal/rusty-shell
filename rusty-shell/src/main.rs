@@ -21,6 +21,14 @@ fn main() {
         let command = parts.next().unwrap();
         let args = parts;
 
+
+        //implementing 'cd' command
+        match command {
+            "cd" => {
+                
+            }
+        }
+
         let mut child = Command::new(command)
                                 .spawn()
                                 .unwrap();
