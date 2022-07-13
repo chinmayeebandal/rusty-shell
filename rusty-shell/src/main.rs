@@ -30,16 +30,22 @@ fn main() {
                     eprintln!("Error in cd: {}", err);
                 }
                 else {
-                    print!("{}/ ", new_dir);
+                    print!("{} ", new_dir);
                 }
-            }
+            },
+            "exit" => return,
             command => {
-                let mut child = Command::new(command)
-                                        .spawn()
-                                        .unwrap();
+                let child = Command::new(command)
+                                    .args(args)
+                                    .spawn();
+                                        
 
-                //dont accept another command until the current one is complete
-                child.wait(); 
+                //dont accept another command until the current one is complete, handle malformed input
+                match child {
+                    Ok(mut child) => { child.wait(); },
+                    Err(err) => eprintln!("Error: {}", err),
+                }
+                
             }
 
         }
