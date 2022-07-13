@@ -11,13 +11,15 @@ fn main() {
 
         print!("> "); //prompt char
         
-
         let mut input = String::new();
         stdin().read_line(&mut input).unwrap();
         stdout().flush();
         
-        //only takes in one word commands at the moment
-        let command = input.trim();//removes the trailing newline left by read_line
+        //handling multiple args
+        //everything after 1st whitespace counts towards args
+        let mut parts = input.trim().split_whitespace(); //trim removes trailing \n left by readline
+        let command = parts.next().unwrap();
+        let args = parts;
 
         let mut child = Command::new(command)
                                 .spawn()
